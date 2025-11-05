@@ -138,13 +138,11 @@ func (h *UserH) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(struct {
-		Status  int         `json:"status"`
-		Message string      `json:"message"`
-		Data    interface{} `json:"data"`
+		Status  int    `json:"status"`
+		Message string `json:"message"`
 	}{
 		Status:  http.StatusOK,
 		Message: "user deleted successfully",
-		Data:    nil,
 	})
 }
 
@@ -157,12 +155,10 @@ func (h *UserH) EnableAccount(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(struct {
-		Status  int         `json:"status"`
-		Message string      `json:"message"`
-		Data    interface{} `json:"data"`
+		Status  int    `json:"status"`
+		Message string `json:"message"`
 	}{
 		Status:  http.StatusOK,
-		Message: "user actived successfully",
-		Data:    nil,
+		Message: "user enabled successfully",
 	})
 }
