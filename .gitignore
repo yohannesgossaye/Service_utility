@@ -1,0 +1,25 @@
+# Ignore the .env file
+.env
+
+# Other common files and directories to ignore
+# Node modules (if applicable)
+node_modules/
+
+# Go binaries and builds
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+
+# Log files
+*.log
+
+# Temporary files
+tmp/
