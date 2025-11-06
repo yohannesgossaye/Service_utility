@@ -2,8 +2,8 @@ package storage
 
 import (
 	"context"
-	"users/internal/domain/dto"
-	"users/internal/domain/models"
+	"users/internal/domain/users/dto"
+	"users/internal/domain/users/models"
 )
 
 type UsersRep interface {

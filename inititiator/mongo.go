@@ -3,7 +3,7 @@ package initiator
 import (
 	"fmt"
 	"users/internal/storage"
-	mo "users/internal/storage/mongo"
+	mo "users/internal/storage/users"
 )
 
 type Persistence struct {

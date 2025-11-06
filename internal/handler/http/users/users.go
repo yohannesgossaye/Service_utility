@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"users/internal/domain/dto"
+	"users/internal/domain/users/dto"
 	"users/internal/handler/http/users/core"
 	"users/internal/service"
 	"users/pkgs/logger"
@@ -60,10 +60,10 @@ func (h *UserH) CreateUser(w http.ResponseWriter, r *http.Request) {
 		Data    dto.UserResponse `json:"data"`
 	}{
 		Status:  http.StatusCreated,
-		Message: "user created successfully",
+		Message: "Customer Registered successfully",
 		Data:    response,
 	})
-	h.logger.Infof("user created successfully")
+	h.logger.Infof("Customer Registered successfully")
 }
 
 func (h *UserH) GetUsers(w http.ResponseWriter, r *http.Request) {

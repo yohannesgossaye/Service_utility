@@ -3,8 +3,8 @@ package users
 import (
 	"context"
 	"fmt"
-	"users/internal/domain/dto"
-	"users/internal/domain/models"
+	"users/internal/domain/users/dto"
+	"users/internal/domain/users/models"
 	"users/internal/service"
 	"users/pkgs/logger"
 	"users/pkgs/utils/email"

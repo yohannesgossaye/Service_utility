@@ -1,8 +1,8 @@
 package core
 
 import (
-	"users/internal/domain/dto"
-	"users/internal/domain/models"
+	"users/internal/domain/users/dto"
+	"users/internal/domain/users/models"
 )
 
 func Tomodelreq(user dto.UsercreateRequest) models.Users {

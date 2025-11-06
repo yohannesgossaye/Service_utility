@@ -3,8 +3,8 @@ package mongo
 import (
 	"errors"
 	"time"
-	"users/internal/domain/dto"
-	"users/internal/domain/models"
+	"users/internal/domain/users/dto"
+	"users/internal/domain/users/models"
 
 	"context"
 
