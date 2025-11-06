@@ -3,6 +3,7 @@ package users
 import (
 	"context"
 	"fmt"
+	"users/internal/domain/dto"
 	"users/internal/domain/models"
 	"users/internal/service"
 	"users/pkgs/logger"
@@ -61,4 +62,8 @@ func (s *ServU) SendEmail(recpiantEmail, fullname string) {
 
 func (s *ServU) EnableAccount(ctx context.Context, id string) (string, error) {
 	return s.SS.EnableAccount(ctx, id)
+}
+
+func (s *ServU) LoginUser(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error) {
+	return s.SS.LoginUser(ctx, req)
 }

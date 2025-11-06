@@ -42,6 +42,11 @@ func InitRoutes(router chi.Router, handler userhandler.UserHandler) {
 				Path:    "/enable/{id}",
 				Handler: handler.EnableAccount,
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/login",
+				Handler: handler.LoginUser,
+			},
 		}
 		usersrouting.NewRoute(r, routes)
 	})

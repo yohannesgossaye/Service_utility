@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"users/internal/domain/dto"
 	"users/internal/domain/models"
 )
 
@@ -12,4 +13,5 @@ type UsersRep interface {
 	UpdateUsers(ctx context.Context, id string, updateduser *models.Users) (models.Users, error)
 	DeleteUser(ctx context.Context, id string) (string, error)
 	EnableAccount(ctx context.Context, id string) (string, error)
+	LoginUser(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error)
 }

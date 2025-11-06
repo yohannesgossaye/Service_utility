@@ -3,6 +3,7 @@ package mongo
 import (
 	"errors"
 	"time"
+	"users/internal/domain/dto"
 	"users/internal/domain/models"
 
 	"context"
@@ -10,6 +11,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 
 	Act_gen "users/pkgs/utils/helper"
+
+	"users/pkgs/auth"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -189,4 +192,24 @@ func (m *MongoUsersStorage) EnableAccount(ctx context.Context, id string) (strin
 	}
 
 	return "enabled successfully", nil
+}
+
+func (m *MongoUsersStorage) LoginUser(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error) {
+	var user models.Users
+	err := m.collection.FindOne(ctx, bson.M{"email": req.Email}).Decode(&user)
+	if err != nil {
+		return nil, errors.New("Invalid email or password")
+	}
+	if user.Password != req.Password {
+		return nil, errors.New("password is not correct")
+	}
+	// generate the token
+	token, err := auth.GenerateToken(user.ID, user.Email)
+	if err != nil {
+		return nil, err
+	}
+	return &dto.LoginResponse{
+		Token:   token,
+		Message: "Login sucessfully ",
+	}, nil
 }

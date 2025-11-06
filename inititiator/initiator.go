@@ -35,7 +35,7 @@ func Initiator() {
 	logger.Infof(" Service layer initialized")
 
 	logger.Infof(" Initializing handlers...")
-	handler := NewHandler(service)
+	handler := NewHandler(service, logger)
 	logger.Infof(" Handlers initialized")
 
 	r := chi.NewRouter()

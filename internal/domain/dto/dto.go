@@ -7,6 +7,17 @@ type UsercreateRequest struct {
 	Email        string  `json:"email"`
 	Phone_number string  `json:"phone_number"`
 	Balance      float64 `json:"balance"`
+	Password     string  `json:"password"`
+}
+
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginResponse struct {
+	Token   string `json:"token"`
+	Message string `json:"message"`
 }
 
 type UserResponse struct {

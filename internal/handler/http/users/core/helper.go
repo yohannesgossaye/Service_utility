@@ -11,5 +11,6 @@ func Tomodelreq(user dto.UsercreateRequest) models.Users {
 		Email:        user.Email,
 		Phone_number: user.Phone_number,
 		Balance:      user.Balance,
+		Password:     user.Password,
 	}
 }

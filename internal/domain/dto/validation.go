@@ -25,3 +25,12 @@ func (v UsercreateRequest) Validate() error {
 		),
 	)
 }
+
+func (v LoginRequest) Validate() error {
+	return validation.ValidateStruct(&v,
+		validation.Field(&v.Email, validation.Required.Error("email is required"),
+			validation.Match(emailRegex).Error("invalid email provided "),
+		),
+		validation.Field(&v.Password, validation.Required.Error("password is required")),
+	)
+}
