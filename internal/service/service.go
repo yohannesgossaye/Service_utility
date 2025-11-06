@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	billsdto "users/internal/domain/bills/dto"
+	billmodels "users/internal/domain/bills/models"
 	"users/internal/domain/users/dto"
 	"users/internal/domain/users/models"
 )
@@ -14,4 +16,8 @@ type UserS interface {
 	DeleteUser(ctx context.Context, id string) (string, error)
 	EnableAccount(ctx context.Context, id string) (string, error)
 	LoginUser(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error)
+}
+
+type BillService interface {
+	GetBills(ctx context.Context, req billsdto.BillrequestCheck) (billmodels.Bills, error)
 }

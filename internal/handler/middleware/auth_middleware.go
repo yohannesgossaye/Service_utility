@@ -11,8 +11,15 @@ type contextKey string
 
 const UserCtxKey contextKey = "user"
 
-// AuthMiddleware verifies JWT token
-func AuthMiddleware(next http.Handler) http.Handler {
+type AuthMiddleware interface {
+	AuthenticateToken(next http.Handler) http.Handler
+}
+
+type jwtAuthMiddleware struct{}
+
+func NewAuthMiddleware() AuthMiddleware { return &jwtAuthMiddleware{} }
+
+func (m *jwtAuthMiddleware) AuthenticateToken(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authHeader := r.Header.Get("Authorization")
 

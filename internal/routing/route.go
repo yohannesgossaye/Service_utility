@@ -9,11 +9,16 @@ import (
 type Route struct {
 	Method  string
 	Path    string
-	Handler func(w http.ResponseWriter, r *http.Request)
+	Handler http.HandlerFunc
+	Mid     []func(http.Handler) http.Handler
 }
 
-func NewRoute(router chi.Router, routes []Route) {
+func NewRoute(r chi.Router, routes []Route) {
 	for _, route := range routes {
-		router.Method(route.Method, route.Path, http.HandlerFunc(route.Handler))
+		handler := http.Handler(route.Handler)
+		for _, mid := range route.Mid {
+			handler = mid(handler)
+		}
+		r.Method(route.Method, route.Path, handler)
 	}
 }

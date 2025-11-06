@@ -11,3 +11,7 @@ type UserHandler interface {
 	EnableAccount(w http.ResponseWriter, r *http.Request)
 	LoginUser(w http.ResponseWriter, r *http.Request)
 }
+
+type BillsHandler interface {
+	GetBills(w http.ResponseWriter, r *http.Request)
+}
