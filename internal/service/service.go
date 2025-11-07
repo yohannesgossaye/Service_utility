@@ -20,4 +20,5 @@ type UserS interface {
 
 type BillService interface {
 	GetBills(ctx context.Context, req billsdto.BillrequestCheck) (billmodels.Bills, error)
+	PayBills(ctx context.Context, req billsdto.BillPaymentRequest) (billsdto.BillPaymentResponse, error)
 }

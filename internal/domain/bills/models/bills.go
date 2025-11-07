@@ -8,3 +8,9 @@ type Bills struct {
 	Amount_due     float64 `json:"amount_due"`
 	Due_date       string  `json:"due_date"`
 }
+
+type BillPaymentResponse struct {
+	TransactionId string `json:"transaction_id"`
+	Message       string `json:"message"`
+	Status        string `json:"status"`
+}

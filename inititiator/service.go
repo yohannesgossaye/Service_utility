@@ -3,6 +3,7 @@ package initiator
 import (
 	"users/internal/service"
 	appbill "users/internal/service/bills"
+	grpcClient "users/internal/service/bills/grpc_client"
 	appUsers "users/internal/service/users"
 	"users/pkgs/logger"
 	"users/pkgs/utils/email"
@@ -16,7 +17,10 @@ type ServiceUs struct {
 func InitService(p Persistence, sender email.Sender, log logger.Logger) ServiceUs {
 
 	userService := appUsers.InitSvc(p.users, log, sender)
-	billService := appbill.NewBills(log)
+
+	// Initialize gRPC client for bill payments
+	grpcBillClient := grpcClient.NewGRPCBillClient()
+	billService := appbill.NewBills(grpcBillClient, log)
 
 	return ServiceUs{
 		UsersService: userService,

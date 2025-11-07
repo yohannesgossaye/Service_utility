@@ -21,6 +21,14 @@ func Billroutes(router chi.Router, handler billshandler.BillsHandler, mid middle
 					mid.AuthenticateToken,
 				},
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/paybills",
+				Handler: handler.PayBills,
+				Mid: []func(next http.Handler) http.Handler{
+					mid.AuthenticateToken,
+				},
+			},
 		}
 		billsrouting.NewRoute(r, routes)
 	})

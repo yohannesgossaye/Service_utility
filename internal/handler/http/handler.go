@@ -14,4 +14,5 @@ type UserHandler interface {
 
 type BillsHandler interface {
 	GetBills(w http.ResponseWriter, r *http.Request)
+	PayBills(w http.ResponseWriter, r *http.Request)
 }

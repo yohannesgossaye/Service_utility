@@ -9,17 +9,22 @@ import (
 	"users/internal/domain/bills/dto"
 	"users/internal/domain/bills/models"
 	"users/pkgs/logger"
+	pb "users/proto/gen"
 
 	"os"
+
+	gr "users/internal/service/bills/grpc_client"
 )
 
 type BillS struct {
-	log logger.Logger
+	grpcClient *gr.GRPCBillClient
+	log        logger.Logger
 }
 
-func NewBills(log logger.Logger) *BillS {
+func NewBills(grpcClient *gr.GRPCBillClient, log logger.Logger) *BillS {
 	return &BillS{
-		log: log,
+		grpcClient: grpcClient,
+		log:        log,
 	}
 }
 
@@ -55,6 +60,26 @@ func (s *BillS) GetBills(ctx context.Context, req dto.BillrequestCheck) (models.
 	}
 
 	return result, nil
+}
+
+func (b *BillS) PayBills(ctx context.Context, req dto.BillPaymentRequest) (dto.BillPaymentResponse, error) {
+	grpcReq := &pb.PayBillRequest{
+		CustomerNumber: req.CustomerNumber,
+		ServiceType:    req.ServiceType,
+		AmountDue:      float64(req.Amount),
+	}
+
+	res, err := b.grpcClient.PayBill(ctx, grpcReq)
+	if err != nil {
+		return dto.BillPaymentResponse{}, err
+	}
+	// we will write after this in mong transaction collection for payment bills and track who pai by user id by middleware
+	// You can also save to the transaction table here after success
+	return dto.BillPaymentResponse{
+		TransactionId: res.TransactionId,
+		Message:       res.Message,
+		Status:        res.Status,
+	}, nil
 }
 
 func GetBillAPI(serviceType string) string {

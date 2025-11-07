@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "proto/gen;payment";
+
+service PaymentService {
+  rpc PayBill(PayBillRequest) returns (PayBillResponse);
+}
+
+message PayBillRequest {
+  string customer_id = 1;
+  string customer_number = 2;
+  string service_type = 3;
+  double amount_due = 4;
+}
+
+message PayBillResponse {
+  string transaction_id = 1;
+  string message = 2;
+  string status = 3;
+}
