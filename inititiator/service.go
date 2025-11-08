@@ -20,7 +20,8 @@ func InitService(p Persistence, sender email.Sender, log logger.Logger) ServiceU
 
 	// Initialize gRPC client for bill payments
 	grpcBillClient := grpcClient.NewGRPCBillClient()
-	billService := appbill.NewBills(grpcBillClient, log)
+	// Pass transaction repository to bills service
+	billService := appbill.NewBills(p.transactions, grpcBillClient, log)
 
 	return ServiceUs{
 		UsersService: userService,

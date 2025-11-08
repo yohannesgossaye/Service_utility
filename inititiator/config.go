@@ -5,10 +5,11 @@ import (
 )
 
 type Config struct {
-	Port      string
-	MongoURI  string
-	Database  string
-	UsersColl string
+	Port             string
+	MongoURI         string
+	Database         string
+	UsersColl        string
+	TransactionsColl string
 }
 
 func getEnv(key, fallback string) string {
@@ -20,9 +21,10 @@ func getEnv(key, fallback string) string {
 
 func InitConfig() Config {
 	return Config{
-		Port:      getEnv("PORT", "8080"),
-		MongoURI:  getEnv("MONGO_URI", "mongodb://db_mongo:27017"),
-		Database:  getEnv("MONGO_DB", "users_db"),
-		UsersColl: getEnv("MONGO_COLLECTION", "user_col"),
+		Port:             getEnv("PORT", "8080"),
+		MongoURI:         getEnv("MONGO_URI", "mongodb://db_mongo:27017"),
+		Database:         getEnv("MONGO_DB", "users_db"),
+		UsersColl:        getEnv("MONGO_COLLECTION", "user_col"),
+		TransactionsColl: getEnv("MONGO_TRANSACTIONS_COLLECTION", "transactions_col"),
 	}
 }

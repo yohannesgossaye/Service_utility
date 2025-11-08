@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"strings"
 	"users/pkgs/auth"
@@ -47,10 +48,19 @@ func (m *jwtAuthMiddleware) AuthenticateToken(next http.Handler) http.Handler {
 	})
 }
 
-// GetUserFromContext helper
-func GetUserFromContext(r *http.Request) *auth.Claims {
-	if claims, ok := r.Context().Value(UserCtxKey).(*auth.Claims); ok {
-		return claims
+type UserInfo struct {
+	UserID string
+	Email  string
+}
+
+func GetUserFromContext(ctx context.Context) (*UserInfo, error) {
+	claims, ok := ctx.Value(UserCtxKey).(*auth.Claims)
+	if !ok || claims == nil {
+		return nil, errors.New("user not found in context")
 	}
-	return nil
+
+	return &UserInfo{
+		UserID: claims.UserID,
+		Email:  claims.Email,
+	}, nil
 }

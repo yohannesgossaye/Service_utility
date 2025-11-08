@@ -21,6 +21,7 @@ type BillCheckResponse struct {
 }
 
 type BillPaymentRequest struct {
+	UserID         string  `json:"user_id"`
 	CustomerNumber string  `json:"customer_number"`
 	ServiceType    string  `json:"service_type"`
 	Amount         float64 `json:"amount"`

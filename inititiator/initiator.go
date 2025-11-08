@@ -24,7 +24,7 @@ func Initiator() {
 	logger.Infof(" Configuration initialized")
 
 	logger.Infof(" Initializing persistence...")
-	mongo, err := InitPersistence(cfg.MongoURI, cfg.Database, cfg.UsersColl)
+	mongo, err := InitPersistence(cfg.MongoURI, cfg.Database, cfg.UsersColl, cfg.TransactionsColl)
 	if err != nil {
 		log.Fatalf("❌ Failed to initialize persistence: %v", err)
 	}

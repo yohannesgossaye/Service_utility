@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	billmodel "users/internal/domain/bills/models"
 	"users/internal/domain/users/dto"
 	"users/internal/domain/users/models"
 )
@@ -14,4 +15,8 @@ type UsersRep interface {
 	DeleteUser(ctx context.Context, id string) (string, error)
 	EnableAccount(ctx context.Context, id string) (string, error)
 	LoginUser(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error)
+}
+
+type Billstxn interface {
+	InsertTxn(ctx context.Context, txn billmodel.Transaction) error
 }
